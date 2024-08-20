@@ -66,4 +66,7 @@ chat.getChat('room', chat.room, data => {
     // hiding the loader again before updating the UI
     loader.classList.add('d-none');
 });
-
+// if there's no data comming hide the loader 
+setTimeout(() => {
+    loader.classList.add('d-none');
+}, 750)

@@ -7,7 +7,7 @@ class ChatUI {
     }
     render(data) {
         // Calculate time since data.time usin fns libirary
-        const when = dateFns.distanceInWordsToNow(
+        const when = dateFns.formatDistanceToNow(
             data.time.toDate(), { addSuffix: true }
         );
         const html = `

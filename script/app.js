@@ -31,12 +31,20 @@ updateName.addEventListener('submit', e => {
 rooms.addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
         chatUI.clear();
+        // if the loader is hidded show it
         chat.updateRoom(e.target.getAttribute('id'))
+        if (loader.classList.contains('d-none')) {
+            loader.classList.remove('d-none');
+        }
         // you must call getChat here to set the listener on again while switching rooms
         chat.getChat('room', chat.room, data => {
             chatUI.render(data);
             loader.classList.add('d-none');
         });
+        // if there's no data comming hide the loader 
+        setTimeout(() => {
+            loader.classList.add('d-none');
+        }, 750)
     }
 });
 
@@ -47,7 +55,7 @@ const user = localStorage.user ? localStorage.user : 'Anonymous';
 // class instances
 const chatUI = new ChatUI(chatList);
 
-import { Chatroom } from './chat.js'
+import { Chatroom } from './chat.js';
 const chat = new Chatroom('general', user);
 
 // Get chat and render
@@ -55,5 +63,7 @@ const chat = new Chatroom('general', user);
 chat.getChat('room', chat.room, data => {
     chatUI.render(data)
     console.log(data)
-    loader.classList.add('d-none'); // hiding the loader again before updating the UI
+    // hiding the loader again before updating the UI
+    loader.classList.add('d-none');
 });
+
